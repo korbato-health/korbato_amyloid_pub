@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Korbato Amyloid</title>
+  <script type="text/javascript">
+    (function(){
+      var pathSegments = window.location.pathname.split('/');
+      var repoName = 'korbato_amyloid_pub';
+      var path = window.location.pathname;
+
+      var pathWithoutRepo = '';
+      var foundRepo = false;
+      for (var i = 0; i < pathSegments.length; i++) {
+        if (foundRepo || pathSegments[i] === repoName) {
+          foundRepo = true;
+          if (pathSegments[i] !== repoName) {
+            pathWithoutRepo += '/' + pathSegments[i];
+          }
+        }
+      }
+
+      var searchPart = window.location.search || '';
+      var hashPart = window.location.hash || '';
+
+      var redirectUrl = window.location.origin + '/' + repoName + '/?redirect='
+                      + encodeURIComponent(pathWithoutRepo + searchPart + hashPart);
+
+      window.location.replace(redirectUrl);
+    })();
+  </script>
+</head>
+<body>
+  <h2>Redirecting...</h2>
+</body>
+</html>
